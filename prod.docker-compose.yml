@@ -1,0 +1,17 @@
+version: "2"
+services:
+  app:
+    build:
+      context: ./suggestit
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: go
+      POSTGRES_DB: go
+      POSTGRES_PASSWORD: abc123
+    ports:
+      - 5432:5432

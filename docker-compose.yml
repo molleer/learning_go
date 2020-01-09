@@ -1,0 +1,19 @@
+version: "2"
+services:
+  app:
+    build:
+      context: ./suggestit
+      dockerfile: dev.Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./suggestit:/go/src/app
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: suggestit
+      POSTGRES_DB: suggestitdb
+      POSTGRES_PASSWORD: abc123
+    ports:
+      - 5432:5432

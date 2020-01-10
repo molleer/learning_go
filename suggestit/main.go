@@ -1,8 +1,8 @@
 package main
 
 /**
-* Falling pits:
-* 	Postgrsql query has placeholders $1, $2, $3.. not ?, ?, ?..
+* Pit falls:
+* 	PostgreSQL query has placeholders $1, $2, $3.. not ?, ?, ?..
 *	json.Marshal requires the names of the variables in a struct begins with a capital letter
  */
 
@@ -21,19 +21,12 @@ import (
 const (
 	host     = "db"
 	port     = 5432
-	user     = "suggestit"
+	user     = "go"
 	password = "abc123"
-	dbname   = "suggestitdb"
+	dbname   = "godb"
 )
 
 var db *sql.DB
-
-type Person struct {
-	Id        int32
-	LastName  string
-	FirstName string
-	Age       int
-}
 
 func main() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+

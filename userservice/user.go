@@ -83,3 +83,20 @@ func login(email string, pass string) (User, error){
 
 	return User{}, errors.New("The Email and password does not match")
 }
+
+func getUser(UUID string) (User, error){
+	var u User
+	var tmp string
+
+	row := db.QueryRow("SELECT * from users WHERE UUID=$1", UUID)
+	err := row.Scan( &u.UUID,
+		&u.Email,
+		&u.First_name,
+		&u.Last_name,
+		&tmp,
+		&tmp,
+		&u.Admin,
+	)
+
+	return u, err
+}

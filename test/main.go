@@ -1,17 +1,27 @@
 package main
 
 import (
-	"crypto/rand"
-	"encoding/base64"
+	//"crypto/rand"
+	"github.com/dgrijalva/jwt-go"
+	//"encoding/base64"
 	"fmt"
 )
 
 func main() {
-	salt := make([]byte, 64)
-    if _, err := rand.Read(salt); err != nil {
-		panic(err)
+	secret := []byte("noTMwMrtsxtYfEFt+VaTXG3mEswCOMVwKpAhjRRWy40=")
+
+	type Hello struct{
+		Hello string
 	}
 
-	a := base64.StdEncoding.EncodeToString(salt)
-	fmt.Printf("%s \n%d\n",a,  len(a))
+	var claims struct {
+		Secret Hello
+		jwt.StandardClaims
+	}
+
+	claims.Secret = Hello{"Hello there"}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	ss, err := token.SignedString(secret)
+	fmt.Printf("%v %v", ss, err)
 }
